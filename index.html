@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | testGae</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/1.0.json", {onProgress: UnityProgress});
+    </script>
+	<script src="https://yandex.ru/games/sdk/v2"></script>
+    <script>
+        YaGames.init().then(ysdk => {
+            console.log('Yandex SDK initialized');
+            window.ysdk = ysdk;
+        });
+        var player;
+
+        ysdk.getPlayer().then(_player => {
+            player = _player;
+        }).catch(err => {
+            // Ошибка при инициализации объекта Player.
+        });
+        player.setStats({
+            allstats: ['stars']
+        }).then(() => {
+            console.log('data is set');
+        });
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">testGae</div>
+      </div>
+    </div>
+  </body>
+</html>
